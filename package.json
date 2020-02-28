@@ -2,7 +2,7 @@
   "name": "01-todolist",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://artemspiridovich.github.io/ToDoList2FullVersion",
+  "homepage": "https://artemspiridovich.github.io/ToDoList2",
   "dependencies": {
     "axios": "^0.19.2",
     "axois": "^0.0.1-security",
