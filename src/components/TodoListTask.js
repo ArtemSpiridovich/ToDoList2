@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import s from './TodolistTask.module.css';
 
 class TodoListTask extends React.Component {
 
@@ -31,7 +31,7 @@ class TodoListTask extends React.Component {
         this.props.deleteTask(this.props.task.id);
     }
     render = () => {
-        let containerCssClass = this.props.task.isDone ? "todoList-task done" : "todoList-task";
+        let containerCssClass = this.props.task.status ? `${s.todoListTaskDone}` : `${s.todoListTask}`;
         let priority = '';
         switch (this.props.task.priority) {
             case 0:
@@ -41,7 +41,7 @@ class TodoListTask extends React.Component {
                 priority = 'Middle';
                 break;
             case 2:
-                priority = 'Hi';
+                priority = 'High';
                 break;
             case 3:
                 priority = 'Urgently';
@@ -52,12 +52,12 @@ class TodoListTask extends React.Component {
         }
         return (
                 <div className={containerCssClass}>
-                    <input type="checkbox" checked={this.props.task.isDone}
+                    <input type="checkbox" checked={this.props.task.status === 2}
                            onChange={this.onIsDoneChanged}/>
                     { this.state.editMode
-                        ? <input onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true} value={this.state.title} />
-                        : <span onClick={this.activateEditMode}>{this.props.task.id} - {this.props.task.title}</span>
-                    }, priority: {priority} <button onClick={this.onDeleteTask}>X</button>
+                        ? <input className={s.inputChange} onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true} value={this.state.title} />
+                        : <span onClick={this.activateEditMode}>{this.props.task.title}</span>
+                    }<span>,</span> <span>priority: {priority}</span> <button className={s.deleteTask} title='delete Task' onClick={this.onDeleteTask}>X</button>
                 </div>
         );
     }

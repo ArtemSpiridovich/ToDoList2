@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import TodoList from "./TodoList";
-import AddNewItemForm from "./AddNewItemForm";
+import TodoList from "./components/TodoList";
+import AddNewItemForm from "./components/AddNewItemForm";
 import {connect} from "react-redux";
-import {addTodoList, getTodoList} from "./reducer";
+import {addTodoList, getTodoList} from "./redux/reducer";
 
 class App extends React.Component {
 
@@ -16,12 +16,12 @@ class App extends React.Component {
     }
 
     render = () => {
-        const todolists = this.props.todolists.map(tl => <TodoList id={tl.id} title={tl.title} tasks={tl.tasks} />)
+        const todolists = this.props.todolists.map(tl => <TodoList id={tl.id} key={tl.id} title={tl.title} tasks={tl.tasks} />)
 
         return (
-            <div>
-                <div>
-                    <AddNewItemForm addItem={this.addTodoList}/>
+            <div className='content'>
+                <div className='header'>
+                    <AddNewItemForm titleButton='Add To Do List' addItem={this.addTodoList}/>
                 </div>
                 <div className="App">
                     {todolists}

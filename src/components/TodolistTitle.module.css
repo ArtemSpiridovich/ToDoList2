@@ -1,0 +1,17 @@
+.content {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleTodolist h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.content button {
+    margin-left: 5px;
+    background-color: red;
+    padding: 0 8px;
+}

@@ -3,4 +3,5 @@ import reducer from "./reducer";
 import thunkMiddleware from "redux-thunk";
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
+window.store = store
 export default store;

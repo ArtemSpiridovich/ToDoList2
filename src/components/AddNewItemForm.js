@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import '../App.css';
 
 class AddNewItemForm extends React.Component {
     state = {
@@ -44,7 +44,7 @@ class AddNewItemForm extends React.Component {
                        onKeyPress={this.onKeyPress}
                        value={this.state.title}
                 />
-                <button onClick={this.onAddItemClick}>Add</button>
+                <button title={this.props.titleButton} onClick={this.onAddItemClick}>Add</button>
             </div>
 
         );

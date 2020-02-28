@@ -1,16 +1,17 @@
 import React from 'react';
-import './App.css';
+import s from './Todolist.module.css';
 import TodoListTasks from "./TodoListTasks";
 import TodoListFooter from "./TodoListFooter";
 import TodoListTitle from "./TodoListTitle";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
-import {addTask, changeTaskTC, changeTodolist, deleteTask, deleteTodolist, getTasks} from "./reducer";
+import {addTaskT, changeTaskTC, changeTodolist, deleteTask, deleteTodolist, getTasks} from "../redux/reducer";
 
 
 class TodoList extends React.Component {
 
     componentDidMount() {
+        debugger
         this.props.getTasks(this.props.id)
     }
 
@@ -19,7 +20,7 @@ class TodoList extends React.Component {
     };
 
     addTask = (newText) => {
-        this.props.addTask(newText, this.props.id)
+        this.props.addTaskT(newText, this.props.id)
     }
 
     changeFilter = (newFilterValue) => {
@@ -37,12 +38,12 @@ class TodoList extends React.Component {
         this.props.changeTodolist(title, this.props.id)
     }
 
-    changeStatus = (taskId, isDone) => {
-        this.changeTaskThis(taskId, {status: isDone});
+    changeStatus = (taskId, status) => {
+        this.changeTaskThis(taskId, {status});
     }
 
     changeTitle = (taskId, title) => {
-        this.changeTaskThis(taskId, {title: title});
+        this.changeTaskThis(taskId, {title});
     }
 
     deleteTodolist = () => {
@@ -57,28 +58,28 @@ class TodoList extends React.Component {
     render = () => {
         let {tasks = []} = this.props;
         return (
-            <div className="todoList">
+            <div className={s.content}>
                 <div className="todoList-header">
                     <TodoListTitle onClick={this.activatedEditMode} title={this.props.title}
                                          onDelete={this.deleteTodolist} changeTodolist={this.changeTodolist}/>
-                    <AddNewItemForm addItem={this.addTask}/>
+                    <AddNewItemForm titleButton='Add task' addItem={this.addTask}/>
 
                 </div>
-
-                <TodoListTasks changeStatus={this.changeStatus}
-                               changeTitle={this.changeTitle}
-                               deleteTask={this.deleteTask}
-                               tasks={tasks.filter(t => {
-                                   if (this.state.filterValue === "All") {
-                                       return true;
-                                   }
-                                   if (this.state.filterValue === "Active") {
-                                       return t.status === 0;
-                                   }
-                                   if (this.state.filterValue === "Completed") {
-                                       return t.status === 2;
-                                   }
-                               })}/>
+                <div className={s.tasks}>
+                    <TodoListTasks changeStatus={this.changeStatus}
+                                   changeTitle={this.changeTitle}
+                                   deleteTask={this.deleteTask}
+                                   tasks={tasks.filter(t => {
+                                       if (this.state.filterValue === "All") {
+                                           return true;
+                                       }
+                                       if (this.state.filterValue === "Active") {
+                                           return t.status === 0;
+                                       }
+                                       if (this.state.filterValue === "Completed") {
+                                           return t.status === 2;
+                                       }
+                                   })}/></div>
                 <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue}/>
             </div>
         );
@@ -86,7 +87,7 @@ class TodoList extends React.Component {
 }
 
 const ConnectedTodolist =
-    connect(null, {addTask, getTasks, changeTaskTC, changeTodolist, deleteTodolist, deleteTask})
+    connect(null, {addTaskT, getTasks, changeTaskTC, changeTodolist, deleteTodolist, deleteTask})
     (TodoList);
 
 export default ConnectedTodolist;

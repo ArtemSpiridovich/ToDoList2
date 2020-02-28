@@ -1,0 +1,28 @@
+.deleteTask {
+    background-color: red;
+    padding: 0 8px;
+}
+
+.todoListTask {
+    width: 280px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.todoListTaskDone {
+    width: 280px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    opacity: .5;
+}
+
+input {
+    margin-top: 6px;
+    outline: none;
+}
+
+.inputChange {
+    width: 85px;
+}
